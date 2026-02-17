@@ -1,0 +1,76 @@
+############################################################
+# PostService - Spring Boot (Maven) .gitignore
+############################################################
+
+
+########################
+# 1) Maven / Build
+########################
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+
+########################
+# 2) Spring Boot Logs
+########################
+logs/
+*.log
+
+
+########################
+# 3) IntelliJ IDEA
+########################
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+
+########################
+# 4) Eclipse / STS
+########################
+.classpath
+.project
+.settings/
+
+
+########################
+# 5) VS Code
+########################
+.vscode/
+
+
+########################
+# 6) OS files
+########################
+.DS_Store
+Thumbs.db
+
+
+########################
+# 7) Environment / Secrets
+########################
+.env
+*.env
+application-prod.properties
+application-prod.yml
+!.env.example
+
+########################
+# 8) Test Reports
+########################
+/surefire-reports/
+/failsafe-reports/
+
+
+########################
+# 9) Temporary / Backup
+########################
+*.tmp
+*.bak
+*.swp
+*.swo
