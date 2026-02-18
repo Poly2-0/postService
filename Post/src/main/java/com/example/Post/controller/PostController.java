@@ -1,7 +1,5 @@
 package com.example.Post.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.Post.DTO.PostResponseDTO;
 import org.springframework.http.MediaType;
 import com.example.Post.service.PostService;
-
-import org.springframework.data.domain.Pageable;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,14 +36,6 @@ public class PostController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/feed")
-    public ResponseEntity<Page<PostResponseDTO>> getFeed(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(postService.getfeed(pageable));
-    }
     // get post by post id
 
     @GetMapping("/{id}")
@@ -66,7 +52,7 @@ public class PostController {
     public ResponseEntity<String> success(Authentication auth) {
         
         String email = auth.getName();
-        String response = "Hello " + email + ", login successful!";
+        String response = "Hello jwt token" + email + ", login successful!";
         return ResponseEntity.ok(response);
     }
 

@@ -7,7 +7,7 @@ import com.example.Post.DTO.PostResponseDTO;
 
 public interface PostFetchService {
 
+    Page<PostResponseDTO> getfeed(Pageable pageable);
     Page<PostResponseDTO> getNearbyPosts(Double lat, Double lng, Double radius, Pageable pageable);
-
 
 }

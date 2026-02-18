@@ -3,8 +3,8 @@ package com.example.Post.service.Impl;
 
 
 import org.modelmapper.ModelMapper;
-
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.Post.DTO.PostResponseDTO;
@@ -20,8 +20,15 @@ private final ModelMapper modelMapper;
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
     }
+    
     @Override
- public Page<PostResponseDTO> getNearbyPosts( Double lat,Double lng, Double radius ,org.springframework.data.domain.Pageable pageable){
+    public Page<PostResponseDTO> getfeed(Pageable pageable){
+        Page<Post> posts = postRepository.findAllByOrderByCreatedAtDesc(pageable);
+        return posts.map(this::mapToDTO);
+    }
+    
+    @Override
+ public Page<PostResponseDTO> getNearbyPosts( Double lat,Double lng, Double radius ,Pageable pageable){
   Page<Post> posts=postRepository.findNearByPosts(lat,lng,radius,pageable);
  return posts.map(this::mapToDTO);
 }
