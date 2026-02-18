@@ -33,7 +33,8 @@ private String mediaUrl;
 private MediaType mediaType;
 private Long likeCount= (long) 0;
 private Long dislikecount=(long) 0;
-
+private Double lat;
+private Double lng;
 @CreationTimestamp
 private LocalDateTime createdAt;
 private int commentCount = 0;

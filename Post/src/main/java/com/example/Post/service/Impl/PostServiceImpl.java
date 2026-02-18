@@ -31,7 +31,7 @@ public class PostServiceImpl implements PostService {
 
 @Override
 @Transactional
-public PostResponseDTO createPost(String caption,MultipartFile file,String authorEmail){
+public PostResponseDTO createPost(String caption,MultipartFile file,Double lat ,Double lng,String mediaType,String authorEmail){
     //user fetch
    
     //save file
@@ -42,6 +42,8 @@ public PostResponseDTO createPost(String caption,MultipartFile file,String autho
     Post post=new Post();
     post.setCaption(caption);
     post.setMediaUrl(fileName);
+    post.setLat(lat);
+    post.setLng(lng);
     post.setMediaType(type);
     post.setAuthorEmail(authorEmail);
     

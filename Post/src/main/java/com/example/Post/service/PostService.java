@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.Post.DTO.PostResponseDTO;
 
 public interface PostService {
-PostResponseDTO createPost(String caption , MultipartFile file ,String authorEmail);
+PostResponseDTO createPost(String caption , MultipartFile file ,Double lat,Double lng,String mediaType,String authorEmail);
 Page<PostResponseDTO>  getfeed(Pageable pageable);
 PostResponseDTO getPostById(Long id);
 void incrementLikes(Long postId);
