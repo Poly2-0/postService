@@ -12,19 +12,11 @@ target/
 *.war
 *.ear
 
-# Build output directories
-build/
-out/
-bin/
-dist/
-
-
 ########################
 # 2) Spring Boot Logs
 ########################
 logs/
 *.log
-
 
 ########################
 # 3) IntelliJ IDEA
@@ -50,13 +42,11 @@ out/
 .vscode/
 *.code-workspace
 
-
 ########################
 # 6) OS files
 ########################
 .DS_Store
 Thumbs.db
-
 
 ########################
 # 7) Environment / Secrets
@@ -80,7 +70,6 @@ application-local.yml
 ########################
 /surefire-reports/
 /failsafe-reports/
-
 
 ########################
 # 9) Temporary / Backup
@@ -107,3 +96,8 @@ yarn-error.log*
 *.sqlite
 *.sqlite3
 *.h2.db
+
+########################
+# 12) Spring Boot Metadata
+########################
+src/main/resources/META-INF/
