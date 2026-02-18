@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.Post.DTO.PostResponseDTO;
 import org.springframework.http.MediaType;
 import com.example.Post.service.PostService;
@@ -31,9 +33,12 @@ public class PostController {
     public ResponseEntity<PostResponseDTO> createPost(
             @RequestParam("caption") String caption,
             @RequestParam("file") MultipartFile file,
+            @RequestParam Double lat,
+            @RequestParam Double lng,
+            @RequestParam String mediaType,
             Authentication auth) {
         String authorEmail = auth.getName();
-        PostResponseDTO response = postService.createPost(caption, file, authorEmail);
+        PostResponseDTO response = postService.createPost(caption, file,lat,lng,mediaType, authorEmail);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -58,10 +63,11 @@ public class PostController {
 
     // test jwt
     @GetMapping("/success")
-    public String success(Authentication auth) {
-
+    public ResponseEntity<String> success(Authentication auth) {
+        
         String email = auth.getName();
-        return "Hello " + email + ", login successful!";
+        String response = "Hello " + email + ", login successful!";
+        return ResponseEntity.ok(response);
     }
 
 }
