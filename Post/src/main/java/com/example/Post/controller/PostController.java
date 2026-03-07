@@ -52,7 +52,7 @@ public class PostController {
     public ResponseEntity<String> success(Authentication auth) {
         
         String email = auth.getName();
-        String response = "Hello jwt token" + email + ", login successful!";
+        String response = "Hello jwt token  " +   email   + ", login successful!";
         return ResponseEntity.ok(response);
     }
 

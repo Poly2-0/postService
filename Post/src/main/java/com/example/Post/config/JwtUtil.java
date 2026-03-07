@@ -1,14 +1,12 @@
 package com.example.Post.config;
 
-import java.security.Key;
-import java.util.Date;
-
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import java.security.Key;
+import java.util.Date;
 
 @Component
 public class JwtUtil {
@@ -20,6 +18,7 @@ public class JwtUtil {
     private long expiration;
 
     private Key getSigningKey() {
+    
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
@@ -33,25 +32,32 @@ public class JwtUtil {
     }
 
     public String extractEmail(String token) {
-       Claims claims=Jwts.parserBuilder()
-                     .setSigningKey(getSigningKey())
-                     .build()
-                     .parseClaimsJws(token)
-                     .getBody();
-
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
         return claims.getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                          .setSigningKey(getSigningKey())
-                          .build()
-                          .parseClaimsJws(token);
-
-                return true;
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token);
+            return true;
+        } catch (SecurityException | MalformedJwtException e) {
+            System.err.println("CRITICAL: Invalid JWT signature/format: " + e.getMessage());
+        } catch (ExpiredJwtException e) {
+            System.err.println("CRITICAL: JWT token is expired: " + e.getMessage());
+        } catch (UnsupportedJwtException e) {
+            System.err.println("CRITICAL: JWT token is unsupported: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("CRITICAL: JWT claims string is empty: " + e.getMessage());
         } catch (Exception e) {
-            return false;
+            System.err.println("CRITICAL: Unexpected error during JWT validation: " + e.getClass().getName());
         }
+        return false;
     }
 }
