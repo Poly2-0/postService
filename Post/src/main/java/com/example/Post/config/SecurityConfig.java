@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/posts/feed/**").authenticated() // Login Required
                         .requestMatchers("/api/comments/**").authenticated()   // Login Required
                         .requestMatchers("/api/Interactions/**").authenticated() // Login Required
+                         .requestMatchers("/api/reports/**").authenticated() // Login Required
                         .requestMatchers("/api/posts/**").permitAll()         
                         .anyRequest().authenticated()) // Safe default
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

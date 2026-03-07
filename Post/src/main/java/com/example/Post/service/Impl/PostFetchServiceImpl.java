@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.Post.DTO.PostResponseDTO;
+import com.example.Post.constant.PostStatus;
 import com.example.Post.entity.Post;
 import com.example.Post.repository.PostRepository;
 import com.example.Post.service.PostFetchService;
@@ -22,8 +23,8 @@ private final ModelMapper modelMapper;
     }
     
     @Override
-    public Page<PostResponseDTO> getfeed(Pageable pageable){
-        Page<Post> posts = postRepository.findAllByOrderByCreatedAtDesc(pageable);
+    public Page<PostResponseDTO> getfeed(Pageable pageable,String authorEmail){
+        Page<Post> posts = postRepository.findByStatusOrderByCreatedAtDesc(PostStatus.ACTIVE,pageable);
         return posts.map(this::mapToDTO);
     }
     

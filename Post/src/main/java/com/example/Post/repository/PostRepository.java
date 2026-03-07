@@ -9,12 +9,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.example.Post.constant.PostStatus;
 import com.example.Post.entity.Post;
 
 import jakarta.transaction.Transactional;
 
 public interface PostRepository extends JpaRepository<Post , Long> {
-Page <Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
+Page<Post> findByStatusOrderByCreatedAtDesc(PostStatus status, Pageable pageable);
 
 //Atomic Update
 @Modifying

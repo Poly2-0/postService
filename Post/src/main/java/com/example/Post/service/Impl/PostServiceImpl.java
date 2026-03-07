@@ -6,8 +6,7 @@ import com.example.Post.constant.MediaType;
 
 import org.modelmapper.ModelMapper;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,13 +50,7 @@ public PostResponseDTO createPost(String caption,MultipartFile file,Double lat ,
     Post savedPost=postRepository.save(post);
     return mapToDTO(savedPost);
 }
-// feed 
-@Override
-public  Page<PostResponseDTO> getfeed(Pageable pageable){
 
-    Page<Post> postPage =postRepository.findAllByOrderByCreatedAtDesc(pageable);
-    return postPage.map(this :: mapToDTO);
-}
 @Override
 public PostResponseDTO getPostById(Long id){
 

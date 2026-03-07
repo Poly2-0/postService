@@ -30,7 +30,7 @@ public class PostfetchController {
           Authentication auth) {
       
       Pageable pageable = PageRequest.of(page, size);
-      return ResponseEntity.ok(postFetchService.getfeed(pageable));
+      return ResponseEntity.ok(postFetchService.getfeed(pageable ,auth.getName()));
   }
   
   @GetMapping("/nearby")

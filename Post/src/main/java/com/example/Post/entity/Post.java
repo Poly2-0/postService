@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.example.Post.constant.MediaType;
+import com.example.Post.constant.PostStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -38,5 +39,9 @@ private Double lng;
 @CreationTimestamp
 private LocalDateTime createdAt;
 private int commentCount = 0;
+
+private int reportCount=0;
+@Enumerated(EnumType.STRING)
+private PostStatus status=PostStatus.ACTIVE;
 
 }
